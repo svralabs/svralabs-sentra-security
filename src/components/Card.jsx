@@ -1,30 +1,24 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function Card({
-  children,
-  className = '',
-  variant = 'glass',
-  rounded = '3xl',
-  padding = 'p-10'
-}) {
+const Card = ({ variant = 'glass', children, className = '' }) => {
+  const baseClasses = 'rounded-[32px] p-10 flex flex-col gap-8';
   const variantClasses = {
-    glass: 'bg-surface-dim/80 backdrop-blur-lg border border-outline-variant/10',
-    solid: 'bg-surface-container-high border border-outline-variant/10'
-  };
-
-  const roundedClasses = {
-    sm: 'rounded-lg',
-    md: 'rounded-xl',
-    lg: 'rounded-2xl',
-    xl: 'rounded-3xl',
-    '2xl': 'rounded-[32px]',
-    '3xl': 'rounded-[40px]',
-    full: 'rounded-full'
+    glass: 'glass-card',
+    solid: 'bg-surface-container-low',
+    outline: 'border border-outline-variant/10',
   };
 
   return (
-    <div className={`${variantClasses[variant]} ${roundedClasses[rounded]} ${padding} ${className}`}>
+    <div className={`${baseClasses} ${variantClasses[variant]} ${className}`}>
       {children}
     </div>
   );
-}
+};
+
+Card.propTypes = {
+  variant: PropTypes.oneOf(['glass', 'solid', 'outline']),
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
+
+export default Card;

@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --margin-mobile: 1rem;
+    --margin-desktop: 2rem;
+    --container-max: 120rem;
+    --gutter: 2rem;
+    --section-gap: 4rem;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .gradient-button {
+    background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+  }
+
+  .border-gradient {
+    position: relative;
+    border-radius: 1rem;
+  }
+
+  .border-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .technical-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #10b981;
+    box-shadow: 0 0 8px #10b981;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-on-scroll {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+}
+
+@layer utilities {
+  .max-w-container-max {
+    max-width: var(--container-max);
+  }
+
+  .px-margin-mobile {
+    padding-left: var(--margin-mobile);
+    padding-right: var(--margin-mobile);
+  }
+
+  .md\:px-margin-desktop {
+    @media (min-width: 768px) {
+      padding-left: var(--margin-desktop);
+      padding-right: var(--margin-desktop);
+    }
+  }
+
+  .gap-gutter {
+    gap: var(--gutter);
+  }
+
+  .mt-section-gap {
+    margin-top: var(--section-gap);
+  }
+}
