@@ -1,0 +1,105 @@
+{
+  "project_name": "svralabs-sentra-security",
+  "architecture_summary": "Modular React app. Pages in src/pages/. Shared components in src/components/. Tailwind CSS for styling. React Router for navigation. Vite build tool. No state management library (use React context for global state if needed).",
+  "tickets": [
+    {
+      "id": "TASK-001",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Landing page skeleton from Stitch screen sentra_security_reinvented",
+      "source_screen": "sentra_security_reinvented",
+      "description": "Convert Stitch HTML/CSS to React component. Extract inline styles to Tailwind classes. Preserve exact layout, spacing, typography. Use semantic HTML5 tags. Mobile-first responsive.",
+      "target_files": [
+        "src/pages/LandingPage.jsx"
+      ],
+      "acceptance_criteria": [
+        "Pixel-perfect match to Stitch screen sentra_security_reinvented",
+        "No inline styles (Tailwind only)",
+        "All text content extracted to constants object at top of file",
+        "Component exports default",
+        "No hardcoded colors (use Tailwind config palette)"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-002",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Shared component library from Stitch style guide",
+      "source_screen": "obsidian_protocol_style_guide",
+      "description": "Extract reusable components (buttons, cards, typography, color palette) from style guide. Create src/components/ui/ directory. Each component gets own file. Use Tailwind for styling. Export all via src/components/ui/index.js.",
+      "target_files": [
+        "src/components/ui/Button.jsx",
+        "src/components/ui/Card.jsx",
+        "src/components/ui/Typography.jsx",
+        "src/components/ui/index.js"
+      ],
+      "acceptance_criteria": [
+        "All components match Stitch style guide exactly",
+        "Props for variants (primary/secondary, sizes)",
+        "No logic (pure presentational components)",
+        "Storybook stories optional (ponytail: add when design system grows)"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-003",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Component showcase page from Stitch screen component_showcase_buttons_cards",
+      "source_screen": "component_showcase_buttons_cards",
+      "description": "Build showcase page demonstrating all UI components. Use components from TASK-002. Page should match Stitch screen layout. Add interactive states (hover, focus) via Tailwind.",
+      "target_files": [
+        "src/pages/ComponentShowcase.jsx"
+      ],
+      "acceptance_criteria": [
+        "All components from TASK-002 rendered with all variants",
+        "Pixel-perfect match to Stitch screen",
+        "Interactive states visible on hover/focus",
+        "No hardcoded content (use constants object)"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-004",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Tailwind config and global styles",
+      "source_screen": "obsidian_protocol_style_guide",
+      "description": "Configure Tailwind. Extract color palette, typography, spacing from Stitch style guide. Add global styles (fonts, base styles) in src/index.css. Configure tailwind.config.js.",
+      "target_files": [
+        "tailwind.config.js",
+        "src/index.css"
+      ],
+      "acceptance_criteria": [
+        "All Stitch colors in Tailwind palette",
+        "Font families match style guide",
+        "Spacing scale matches design",
+        "No custom CSS (Tailwind only)"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-005",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "App shell, navigation bar, and router wiring (src/App.jsx)",
+      "source_screen": "",
+      "description": "Create app shell. Add navigation bar (extract from Stitch screens if present, else minimal placeholder). Set up React Router. Configure routes for all pages (LandingPage, ComponentShowcase). Add 404 page. Ensure responsive layout.",
+      "target_files": [
+        "src/App.jsx",
+        "src/pages/NotFound.jsx"
+      ],
+      "acceptance_criteria": [
+        "All pages accessible via navigation",
+        "Active route highlighted in nav",
+        "404 page renders for unknown routes",
+        "Responsive layout (mobile/desktop)",
+        "Router uses lazy loading (ponytail: add when app grows)"
+      ],
+      "status": "DONE"
+    }
+  ],
+  "status": "IN_PROGRESS",
+  "updated_at": "2026-08-20 12:10:41"
+}

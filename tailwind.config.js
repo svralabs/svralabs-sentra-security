@@ -1,0 +1,71 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        primary: '#00FF9D',
+        'on-primary': '#003825',
+        'primary-container': '#005237',
+        'on-primary-container': '#6FFFD2',
+        'secondary': '#B8C2BC',
+        'on-secondary': '#20342D',
+        'secondary-container': '#364B42',
+        'on-secondary-container': '#D4E0DA',
+        'tertiary': '#BEC6DD',
+        'on-tertiary': '#293149',
+        'tertiary-container': '#3F4860',
+        'on-tertiary-container': '#DCE2FF',
+        'error': '#FFB4AB',
+        'on-error': '#690005',
+        'error-container': '#93000A',
+        'on-error-container': '#FFDAD6',
+        'surface-dim': '#0E1412',
+        'surface': '#101412',
+        'surface-bright': '#363636',
+        'surface-container-lowest': '#090F0D',
+        'surface-container-low': '#1C201E',
+        'surface-container': '#202422',
+        'surface-container-high': '#2B2F2D',
+        'surface-container-highest': '#363A38',
+        'on-surface': '#E1E3E0',
+        'on-surface-variant': '#C0C9C3',
+        'outline': '#8A938D',
+        'outline-variant': '#444C46',
+        'inverse-surface': '#E1E3E0',
+        'inverse-on-surface': '#2B2F2D',
+        'inverse-primary': '#006D4B',
+        'shadow': '#000000',
+        'scrim': '#000000',
+      },
+      fontFamily: {
+        'headline-sm': ['"Roboto Flex"', 'sans-serif'],
+        'headline-md': ['"Roboto Flex"', 'sans-serif'],
+        'label-mono': ['"Roboto Mono"', 'monospace'],
+      },
+      fontSize: {
+        'headline-sm': '1.25rem',
+        'headline-md': '1.75rem',
+        'label-mono': '0.875rem',
+      },
+      spacing: {
+        'gutter': '1.5rem',
+        'margin-desktop': '2rem',
+        'section-gap': '8rem',
+      },
+      maxWidth: {
+        'container-max': '1200px',
+      },
+      borderRadius: {
+        '32px': '2rem',
+      },
+      boxShadow: {
+        'rim-light': '0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.15)',
+      },
+    },
+  },
+  plugins: [],
+}
