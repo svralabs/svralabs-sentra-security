@@ -1,23 +1,23 @@
 {
   "project_name": "svralabs-sentra-security",
-  "architecture_summary": "Modular React app. Pages in src/pages/. Shared components in src/components/. Tailwind CSS for styling. React Router for navigation. Vite build tool. No state management library (use React context for global state if needed).",
+  "architecture_summary": "Modular React app. Pages in src/pages/. Shared components in src/components/. Tailwind CSS for styling. React Router for navigation. No state management lib (useState + context for now).",
   "tickets": [
     {
       "id": "TASK-001",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Landing page skeleton from Stitch screen sentra_security_reinvented",
+      "title": "Landing page skeleton (src/pages/Landing.jsx)",
       "source_screen": "sentra_security_reinvented",
-      "description": "Convert Stitch HTML/CSS to React component. Extract inline styles to Tailwind classes. Preserve exact layout, spacing, typography. Use semantic HTML5 tags. Mobile-first responsive.",
+      "description": "Convert Stitch screen `sentra_security_reinvented` to React. Extract hero section, tagline, CTA buttons. Preserve exact layout, spacing, typography. Use Tailwind classes from style guide.",
       "target_files": [
-        "src/pages/LandingPage.jsx"
+        "src/pages/Landing.jsx",
+        "src/components/HeroSection.jsx"
       ],
       "acceptance_criteria": [
-        "Pixel-perfect match to Stitch screen sentra_security_reinvented",
-        "No inline styles (Tailwind only)",
-        "All text content extracted to constants object at top of file",
-        "Component exports default",
-        "No hardcoded colors (use Tailwind config palette)"
+        "Pixel-perfect match to Stitch screen",
+        "Responsive down to 320px width",
+        "All text content editable via props or i18n keys",
+        "CTA buttons log click events to console (placeholder for analytics)"
       ],
       "status": "DONE"
     },
@@ -25,20 +25,18 @@
       "id": "TASK-002",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Shared component library from Stitch style guide",
+      "title": "Style guide extraction (src/styles/theme.js)",
       "source_screen": "obsidian_protocol_style_guide",
-      "description": "Extract reusable components (buttons, cards, typography, color palette) from style guide. Create src/components/ui/ directory. Each component gets own file. Use Tailwind for styling. Export all via src/components/ui/index.js.",
+      "description": "Extract color palette, typography scale, spacing units, shadows, borders from `obsidian_protocol_style_guide`. Export as Tailwind config object. Document breakpoints, animation tokens.",
       "target_files": [
-        "src/components/ui/Button.jsx",
-        "src/components/ui/Card.jsx",
-        "src/components/ui/Typography.jsx",
-        "src/components/ui/index.js"
+        "src/styles/theme.js",
+        "tailwind.config.js"
       ],
       "acceptance_criteria": [
-        "All components match Stitch style guide exactly",
-        "Props for variants (primary/secondary, sizes)",
-        "No logic (pure presentational components)",
-        "Storybook stories optional (ponytail: add when design system grows)"
+        "All Stitch colors mapped to Tailwind `theme.extend.colors`",
+        "Typography scale matches Stitch (font-family, weight, size, line-height)",
+        "Spacing system uses Tailwind `theme.extend.spacing` (4px base unit)",
+        "Dark mode classes match Stitch dark variants"
       ],
       "status": "DONE"
     },
@@ -46,17 +44,21 @@
       "id": "TASK-003",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Component showcase page from Stitch screen component_showcase_buttons_cards",
+      "title": "Shared component library (src/components/)",
       "source_screen": "component_showcase_buttons_cards",
-      "description": "Build showcase page demonstrating all UI components. Use components from TASK-002. Page should match Stitch screen layout. Add interactive states (hover, focus) via Tailwind.",
+      "description": "Build reusable components from `component_showcase_buttons_cards`. Focus: PrimaryButton, SecondaryButton, Card, Badge. Use extracted style guide. Support disabled, loading, icon variants.",
       "target_files": [
-        "src/pages/ComponentShowcase.jsx"
+        "src/components/PrimaryButton.jsx",
+        "src/components/SecondaryButton.jsx",
+        "src/components/Card.jsx",
+        "src/components/Badge.jsx",
+        "src/components/index.js"
       ],
       "acceptance_criteria": [
-        "All components from TASK-002 rendered with all variants",
-        "Pixel-perfect match to Stitch screen",
-        "Interactive states visible on hover/focus",
-        "No hardcoded content (use constants object)"
+        "Props match Stitch variants (size, color, state)",
+        "Hover/focus/active states pixel-perfect",
+        "Accessible (keyboard nav, ARIA labels)",
+        "Storybook stories for each component (ponytail: add Storybook later)"
       ],
       "status": "DONE"
     },
@@ -64,18 +66,19 @@
       "id": "TASK-004",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Tailwind config and global styles",
-      "source_screen": "obsidian_protocol_style_guide",
-      "description": "Configure Tailwind. Extract color palette, typography, spacing from Stitch style guide. Add global styles (fonts, base styles) in src/index.css. Configure tailwind.config.js.",
+      "title": "Feature section modules (src/pages/Landing.jsx)",
+      "source_screen": "sentra_security_reinvented",
+      "description": "Extract feature grid, testimonials, stats from landing screen. Build as reusable modules. Use shared Card component. Preserve animations (fade-in on scroll).",
       "target_files": [
-        "tailwind.config.js",
-        "src/index.css"
+        "src/pages/Landing.jsx",
+        "src/components/FeatureGrid.jsx",
+        "src/components/Testimonials.jsx",
+        "src/components/Stats.jsx"
       ],
       "acceptance_criteria": [
-        "All Stitch colors in Tailwind palette",
-        "Font families match style guide",
-        "Spacing scale matches design",
-        "No custom CSS (Tailwind only)"
+        "Modules match Stitch layout (grid columns, gutters)",
+        "Animations use native IntersectionObserver (ponytail: replace with Framer Motion later)",
+        "Content editable via props or CMS keys"
       ],
       "status": "DONE"
     },
@@ -83,23 +86,43 @@
       "id": "TASK-005",
       "role": "frontend",
       "model": "hermes-auto",
+      "title": "Navigation bar and footer (src/components/Layout.jsx)",
+      "source_screen": "sentra_security_reinvented",
+      "description": "Build responsive navbar (desktop/mobile menu). Extract footer from landing screen. Use shared Button components. Navbar sticky on scroll. Footer links functional (placeholder routes).",
+      "target_files": [
+        "src/components/Layout.jsx",
+        "src/components/Navbar.jsx",
+        "src/components/Footer.jsx"
+      ],
+      "acceptance_criteria": [
+        "Navbar collapses to hamburger menu < 768px",
+        "Active route highlighted",
+        "Footer social icons link to external URLs (noopener noreferrer)",
+        "Dark/light mode toggle functional (localStorage persistence)"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-006",
+      "role": "frontend",
+      "model": "hermes-auto",
       "title": "App shell, navigation bar, and router wiring (src/App.jsx)",
       "source_screen": "",
-      "description": "Create app shell. Add navigation bar (extract from Stitch screens if present, else minimal placeholder). Set up React Router. Configure routes for all pages (LandingPage, ComponentShowcase). Add 404 page. Ensure responsive layout.",
+      "description": "Set up React Router. Wrap app in Layout component. Configure routes for landing page. Add 404 page. Navbar/footer persist across routes. Dark mode context provider.",
       "target_files": [
         "src/App.jsx",
+        "src/routes.js",
         "src/pages/NotFound.jsx"
       ],
       "acceptance_criteria": [
-        "All pages accessible via navigation",
-        "Active route highlighted in nav",
-        "404 page renders for unknown routes",
-        "Responsive layout (mobile/desktop)",
-        "Router uses lazy loading (ponytail: add when app grows)"
+        "Routes match: `/` \u2192 Landing, `*` \u2192 NotFound",
+        "Layout persists across routes",
+        "Router uses lazy loading (ponytail: add later)",
+        "Dark mode toggle updates app-wide state"
       ],
       "status": "DONE"
     }
   ],
   "status": "IN_PROGRESS",
-  "updated_at": "2026-08-20 12:10:41"
+  "updated_at": "2026-08-20 14:03:46"
 }

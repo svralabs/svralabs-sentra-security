@@ -4,12 +4,12 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ErrorBoundary from './components/ErrorBoundary';
-import ComponentShowcase from './pages/ComponentShowcase';
+import Landing from './pages/Landing';
 
 function ScreenBar() {
   const loc = useLocation();
   const navs = [
-    { path: '/', label: 'ComponentShowcase' }
+    { path: '/', label: 'Landing' }
   ];
 
   return (
@@ -45,8 +45,8 @@ export default function App() {
               <ScreenBar />
               <div className="pt-10 min-h-screen">
                 <Routes>
-                  <Route path='/' element={<ComponentShowcase />} />
-                  <Route path="*" element={<ComponentShowcase />} />
+                  <Route path='/' element={<Landing />} />
+                  <Route path="*" element={<Landing />} />
                 </Routes>
               </div>
             </BrowserRouter>
