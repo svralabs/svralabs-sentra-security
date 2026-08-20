@@ -1,22 +1,15 @@
 import React from 'react';
-
-export default function Button({ variant = 'primary', size = 'medium', disabled = false, children, ...props }) {
-  const baseClasses = 'rounded font-bold tracking-tight transition-all';
-  const variantClasses = {
-    primary: 'bg-primary text-on-primary hover:opacity-90',
-    secondary: 'bg-surface-container text-on-surface hover:bg-surface-container-high',
-    tertiary: 'bg-transparent text-primary hover:bg-white/5',
+export default function Button({ children, variant = 'primary', size = 'md', className = '', ...props }) {
+  const base = "font-semibold rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2";
+  const variants = {
+    primary: "bg-primary text-white hover:opacity-90 shadow-md shadow-primary/20",
+    secondary: "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-200",
+    outline: "border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50",
+    danger: "bg-rose-500 text-white hover:bg-rose-600"
   };
-  const sizeClasses = {
-    small: 'py-1 px-3 text-sm',
-    medium: 'py-2 px-4 text-sm',
-    large: 'py-3 px-6 text-base',
-  };
-
-  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
-
+  const sizes = { sm: "px-3 py-1.5 text-xs", md: "px-4 py-2.5 text-sm", lg: "px-6 py-3.5 text-base" };
   return (
-    <button className={classes} disabled={disabled} {...props}>
+    <button className={`${base} ${variants[variant] || variants.primary} ${sizes[size] || sizes.md} ${className}`} {...props}>
       {children}
     </button>
   );
