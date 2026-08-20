@@ -1,23 +1,22 @@
 {
   "project_name": "svralabs-sentra-security",
-  "architecture_summary": "Modular React app. Pages in src/pages/. Shared components in src/components/. Tailwind CSS for styling. React Router for navigation. No state management (local state sufficient).",
+  "architecture_summary": "Modular React app. Pages in src/pages/. Shared components in src/components/. Tailwind CSS for styling. React Router for navigation. No state management (useState/useContext only).",
   "tickets": [
     {
       "id": "TASK-001",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Landing page (src/pages/Landing.jsx)",
+      "title": "Landing page skeleton (src/pages/LandingPage.jsx)",
       "source_screen": "sentra_security_reinvented",
-      "description": "Convert Stitch screen `sentra_security_reinvented` to React component. Extract inline styles to Tailwind classes. Preserve exact layout, typography, spacing, colors. Mobile-responsive.",
+      "description": "Convert Stitch HTML to React. Extract static assets (images, fonts) to public/. Use Tailwind classes. Preserve exact layout, spacing, typography. Skip animations for now.",
       "target_files": [
-        "src/pages/Landing.jsx",
-        "src/styles/globals.css"
+        "src/pages/LandingPage.jsx",
+        "public/images/*"
       ],
       "acceptance_criteria": [
-        "Pixel-perfect match to Stitch screen",
-        "All text, images, buttons render correctly",
-        "Hover/focus states match design",
-        "Mobile breakpoint at 768px",
+        "Pixel-perfect match to sentra_security_reinvented screen",
+        "Responsive (mobile/desktop) without horizontal scroll",
+        "All text selectable, all links clickable (placeholder # for now)",
         "No console errors"
       ],
       "status": "DONE"
@@ -26,19 +25,22 @@
       "id": "TASK-002",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Style guide page (src/pages/StyleGuide.jsx)",
+      "title": "Shared UI components (src/components/) from style guide",
       "source_screen": "obsidian_protocol_style_guide",
-      "description": "Convert Stitch screen `obsidian_protocol_style_guide` to React component. Extract color palette, typography scale, spacing tokens to Tailwind config. Document tokens in src/styles/README.md.",
+      "description": "Extract reusable components: Button, Card, Badge, Header, Footer. Use Tailwind. Props: variant, size, disabled. No logic. Storybook-style showcase in src/components/Showcase.jsx.",
       "target_files": [
-        "src/pages/StyleGuide.jsx",
-        "tailwind.config.js",
-        "src/styles/README.md"
+        "src/components/Button.jsx",
+        "src/components/Card.jsx",
+        "src/components/Badge.jsx",
+        "src/components/Header.jsx",
+        "src/components/Footer.jsx",
+        "src/components/Showcase.jsx"
       ],
       "acceptance_criteria": [
-        "All design tokens match Stitch screen",
-        "Tokens reusable across app",
-        "README documents usage",
-        "No hardcoded values in components"
+        "Components match obsidian_protocol_style_guide exactly",
+        "Variants (primary/secondary/tertiary) work",
+        "Disabled state renders correctly",
+        "Showcase page renders all components with all variants"
       ],
       "status": "DONE"
     },
@@ -46,19 +48,17 @@
       "id": "TASK-003",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Shared components (src/components/) - Buttons & Cards",
+      "title": "Component showcase page (src/pages/ComponentShowcase.jsx)",
       "source_screen": "component_showcase_buttons_cards",
-      "description": "Extract reusable buttons and cards from Stitch screen `component_showcase_buttons_cards`. Create src/components/Button.jsx and src/components/Card.jsx. Support all variants shown in design. Prop API: { variant, size, children, onClick }.",
+      "description": "Build page using components from TASK-002. Match component_showcase_buttons_cards layout. Add interactive demo: button click increments counter (no persistence).",
       "target_files": [
-        "src/components/Button.jsx",
-        "src/components/Card.jsx",
-        "src/components/index.js"
+        "src/pages/ComponentShowcase.jsx"
       ],
       "acceptance_criteria": [
-        "All variants render correctly",
-        "Props documented in JSDoc",
-        "Components used in StyleGuide page for showcase",
-        "No duplicate code between variants"
+        "Pixel-perfect match to component_showcase_buttons_cards",
+        "All components from TASK-002 visible and functional",
+        "Button click demo works (counter increments)",
+        "Responsive layout"
       ],
       "status": "DONE"
     },
@@ -66,24 +66,44 @@
       "id": "TASK-004",
       "role": "frontend",
       "model": "hermes-auto",
+      "title": "Static asset pipeline and Tailwind config",
+      "source_screen": "",
+      "description": "Set up Tailwind. Configure theme to match Stitch design tokens (colors, fonts, spacing). Extract all static assets (images, fonts) to public/. Optimize images (max 1920px width, WebP format).",
+      "target_files": [
+        "tailwind.config.js",
+        "postcss.config.js",
+        "public/images/*",
+        "public/fonts/*"
+      ],
+      "acceptance_criteria": [
+        "All Stitch design colors in Tailwind config",
+        "Font families match design (Inter, monospace fallback)",
+        "Images optimized (WebP, <200KB each)",
+        "No 404s for assets in dev tools"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-005",
+      "role": "frontend",
+      "model": "hermes-auto",
       "title": "App shell, navigation bar, and router wiring (src/App.jsx)",
       "source_screen": "",
-      "description": "Create app shell. Add navigation bar with links to Landing and StyleGuide pages. Set up React Router with routes: `/` (Landing), `/style-guide` (StyleGuide). Dark/light mode toggle (default dark).",
+      "description": "Create App.jsx. Set up React Router with routes: / (LandingPage), /components (ComponentShowcase). Add Header/Footer from TASK-002. Dark/light mode toggle (localStorage persistence).",
       "target_files": [
         "src/App.jsx",
-        "src/main.jsx",
+        "src/index.jsx",
         "src/routes.jsx"
       ],
       "acceptance_criteria": [
-        "Navigation works without page reload",
-        "Active route highlighted",
-        "Dark mode matches design",
-        "404 page redirects to Landing",
-        "Router lazy-loads pages"
+        "Navigation between pages works",
+        "Header/Footer consistent across pages",
+        "Dark/light mode toggle persists on refresh",
+        "No layout shift on route change"
       ],
       "status": "DONE"
     }
   ],
   "status": "IN_PROGRESS",
-  "updated_at": "2026-08-20 15:51:04"
+  "updated_at": "2026-08-20 17:45:27"
 }

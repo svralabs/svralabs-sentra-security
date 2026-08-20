@@ -1,38 +1,23 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
-const Button = ({ variant = 'primary', size = 'medium', children, onClick }) => {
-  const baseClasses = 'font-bold rounded-lg transition-colors duration-200';
+export default function Button({ variant = 'primary', size = 'medium', disabled = false, children, ...props }) {
+  const baseClasses = 'rounded font-bold tracking-tight transition-all';
   const variantClasses = {
-    primary: 'bg-primary text-on-primary hover:bg-primary-hover',
-    secondary: 'bg-secondary text-on-secondary hover:bg-secondary-hover',
-    tertiary: 'bg-tertiary text-on-tertiary hover:bg-tertiary-hover',
-    outline: 'border border-outline text-on-surface hover:bg-white/5',
-    text: 'text-primary hover:bg-white/5',
-    gradient: 'bg-gradient-to-r from-primary to-secondary text-on-primary',
-    animated: 'bg-black text-white border border-white/10 hover:scale-105',
+    primary: 'bg-primary text-on-primary hover:opacity-90',
+    secondary: 'bg-surface-container text-on-surface hover:bg-surface-container-high',
+    tertiary: 'bg-transparent text-primary hover:bg-white/5',
+  };
+  const sizeClasses = {
+    small: 'py-1 px-3 text-sm',
+    medium: 'py-2 px-4 text-sm',
+    large: 'py-3 px-6 text-base',
   };
 
-  const sizeClasses = {
-    small: 'px-3 py-1.5 text-sm',
-    medium: 'px-4 py-2 text-sm',
-    large: 'px-6 py-3 text-base',
-  };
+  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
 
   return (
-    <button
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]}`}
-      onClick={onClick}
-    >
+    <button className={classes} disabled={disabled} {...props}>
       {children}
     </button>
   );
-};
-
-Button.propTypes = {
-  variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'outline', 'text', 'gradient', 'animated']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  children: PropTypes.node.isRequired,
-  onClick: PropTypes.func,
-};
-
-export default Button;
+}

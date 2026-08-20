@@ -1,24 +1,11 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
-const Card = ({ variant = 'glass', children, className = '' }) => {
-  const baseClasses = 'rounded-[32px] p-10 flex flex-col gap-8';
-  const variantClasses = {
-    glass: 'glass-card',
-    solid: 'bg-surface-container-low',
-    outline: 'border border-outline-variant/10',
-  };
+export default function Card({ children, className = '', ...props }) {
+  const baseClasses = 'p-8 rounded-[32px] bg-surface-container border border-white/10 rim-light hover:border-white/20 transition-all group';
 
   return (
-    <div className={`${baseClasses} ${variantClasses[variant]} ${className}`}>
+    <div className={`${baseClasses} ${className}`} {...props}>
       {children}
     </div>
   );
-};
-
-Card.propTypes = {
-  variant: PropTypes.oneOf(['glass', 'solid', 'outline']),
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-};
-
-export default Card;
+}
